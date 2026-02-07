@@ -52,6 +52,7 @@ async function renderWords(filter = "") {
                 <div>
                     <span class="word">${word.word}</span>
                     <span class="phonetic">[${word.phonetic || '?'}]</span>
+                    <span class="speaker-icon" title="Play pronunciation">🔊</span>
                 </div>
                 <span class="delete-icon">🗑️</span>
             </div>
@@ -69,6 +70,11 @@ async function renderWords(filter = "") {
 
         // Click to pronunciation
         card.querySelector('.word').addEventListener('click', () => {
+            chrome.runtime.sendMessage({ action: "PLAY_AUDIO", url: word.audioUrl, word: word.word });
+        });
+
+        // Click speaker icon to play pronunciation
+        card.querySelector('.speaker-icon').addEventListener('click', () => {
             chrome.runtime.sendMessage({ action: "PLAY_AUDIO", url: word.audioUrl, word: word.word });
         });
 
