@@ -35,17 +35,18 @@ async function handleLookup(word, context, sourceUrl) {
     const enRes = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`);
     const enData = await enRes.json();
 
-    let cnDef = "Translation loading...";
-    // Simple Youdao fetch
+    let cnDef = "";
+    // Try Youdao API with HTTPS
     try {
-      const cnRes = await fetch(`http://dict.youdao.com/suggest?num=1&doctype=json&q=${word}`);
+      const cnRes = await fetch(`https://dict.youdao.com/suggest?num=1&doctype=json&q=${word}`);
       const cnData = await cnRes.json();
       if (cnData?.data?.entries?.[0]?.explain) {
         cnDef = cnData.data.entries[0].explain;
-      } else {
-        cnDef = "No CN definition";
       }
-    } catch (e) { cnDef = "Network Error (CN)"; }
+    } catch (e) {
+      console.log("Youdao API failed:", e);
+    }
+
 
     let audioUrl = null;
     let enDef = "";
@@ -57,6 +58,11 @@ async function handleLookup(word, context, sourceUrl) {
       const audioObj = entry.phonetics.find(p => p.audio);
       audioUrl = audioObj ? audioObj.audio : null;
       enDef = entry.meanings[0]?.definitions[0]?.definition || "";
+    }
+
+    // Fallback: if no Chinese translation, use English definition
+    if (!cnDef && enDef) {
+      cnDef = enDef;
     }
 
     const data = { word, cnDef, enDef, audioUrl, phonetic, context, sourceUrl, timestamp: Date.now() };
