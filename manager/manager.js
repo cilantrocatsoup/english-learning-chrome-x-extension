@@ -70,12 +70,13 @@ async function renderWords(filter = "") {
 
         // Click to pronunciation
         card.querySelector('.word').addEventListener('click', () => {
-            chrome.runtime.sendMessage({ action: "PLAY_AUDIO", url: word.audioUrl, word: word.word });
+            playAudio(word.audioUrl, word.word);
         });
 
         // Click speaker icon to play pronunciation
-        card.querySelector('.speaker-icon').addEventListener('click', () => {
-            chrome.runtime.sendMessage({ action: "PLAY_AUDIO", url: word.audioUrl, word: word.word });
+        card.querySelector('.speaker-icon').addEventListener('click', (e) => {
+            e.stopPropagation();
+            playAudio(word.audioUrl, word.word);
         });
 
         // Click context to open URL
@@ -98,4 +99,17 @@ async function renderWords(filter = "") {
 
         grid.appendChild(card);
     });
+}
+
+// Audio playback function
+function playAudio(audioUrl, word) {
+    if (audioUrl) {
+        const audio = new Audio(audioUrl);
+        audio.play().catch(() => {
+            // Fallback to TTS if audio fails
+            chrome.tts.speak(word, { lang: 'en-US', rate: 1.0 });
+        });
+    } else {
+        chrome.tts.speak(word, { lang: 'en-US', rate: 1.0 });
+    }
 }
