@@ -1,0 +1,21 @@
+# Python
+*.pyc
+__pycache__/
+*.py[cod]
+create_icon.py
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Temporary files
+*.log
+*.tmp
+
+# Old/backup files
+icon128.png
+*.bak

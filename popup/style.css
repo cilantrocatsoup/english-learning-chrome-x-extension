@@ -1,0 +1,128 @@
+:root {
+  --primary: #2196F3;
+  --bg: #f9f9f9;
+  --card-bg: #fff;
+  --text: #333;
+  --text-secondary: #666;
+  --danger: #ff4444;
+}
+
+body {
+  width: 350px;
+  height: 500px;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  overflow-y: auto;
+}
+
+.header {
+  background: var(--primary);
+  color: white;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+h1 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.danger-btn {
+  background: rgba(255,255,255,0.2);
+  border: 1px solid rgba(255,255,255,0.4);
+  color: white;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.danger-btn:hover {
+  background: var(--danger);
+  border-color: var(--danger);
+}
+
+.word-list {
+  padding: 10px;
+}
+
+.word-card {
+  background: var(--card-bg);
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 10px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  transition: transform 0.2s;
+  position: relative;
+}
+
+.word-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 5px;
+}
+
+.word-text {
+  font-size: 18px;
+  font-weight: bold;
+  color: var(--primary);
+  cursor: pointer;
+}
+
+.phonetic {
+  font-family: 'Times New Roman', serif;
+  color: var(--text-secondary);
+  font-size: 14px;
+  margin-left: 8px;
+}
+
+.delete-btn {
+  background: none;
+  border: none;
+  color: #ccc;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 0 5px;
+}
+
+.delete-btn:hover {
+  color: var(--danger);
+}
+
+.definition {
+  font-size: 14px;
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+
+.context {
+  font-size: 12px;
+  color: var(--text-secondary);
+  background: #f0f0f0;
+  padding: 5px;
+  border-left: 3px solid var(--primary);
+  border-radius: 0 4px 4px 0;
+  margin-top: 5px;
+}
+
+.empty-state {
+  text-align: center;
+  color: var(--text-secondary);
+  margin-top: 50px;
+  padding: 20px;
+}

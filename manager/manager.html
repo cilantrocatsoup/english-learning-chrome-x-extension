@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vocabulary Manager</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="sidebar">
+        <h2>🇬🇧 Vocab Book</h2>
+        <div class="stats">
+            <div class="stat-item">
+                <span class="stat-value" id="totalWords">0</span>
+                <span class="stat-label">Words</span>
+            </div>
+        </div>
+        <nav>
+            <button class="nav-btn active" id="viewAll">All Words</button>
+            <button class="nav-btn" id="exportBtn">Export Data</button>
+            <button class="nav-btn danger" id="clearAllBtn">Clear All</button>
+        </nav>
+    </div>
+
+    <div class="main-content">
+        <header>
+            <input type="text" id="searchInput" placeholder="Search your words...">
+            <div class="actions">
+                <button class="action-btn" id="refreshBtn">Refresh</button>
+            </div>
+        </header>
+
+        <div id="wordGrid" class="word-grid">
+            <!-- Cards injected here -->
+        </div>
+    </div>
+
+    <script src="manager.js"></script>
+</body>
+
+</html>
