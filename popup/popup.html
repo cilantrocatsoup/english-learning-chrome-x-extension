@@ -1,17 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Vocabulary Book</title>
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
   <div class="header">
     <h1>Vocabulary Helper</h1>
-    <button id="clearBtn" class="danger-btn">Clear All</button>
+    <div class="header-buttons">
+      <button id="openManagerBtn" class="primary-btn">📚 Open Manager</button>
+      <button id="clearBtn" class="danger-btn">Clear All</button>
+    </div>
   </div>
-  
+
   <div id="wordList" class="word-list">
     <!-- Words will be injected here -->
     <div class="empty-state">No words saved yet. Click English words on any page!</div>
@@ -19,4 +24,5 @@
 
   <script src="popup.js"></script>
 </body>
+
 </html>

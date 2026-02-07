@@ -1,9 +1,11 @@
-
 // Popup Script
 
 document.addEventListener('DOMContentLoaded', () => {
     loadWords();
     document.getElementById('clearBtn').addEventListener('click', clearAllWords);
+    document.getElementById('openManagerBtn').addEventListener('click', () => {
+        chrome.runtime.openOptionsPage();
+    });
 });
 
 async function loadWords() {
