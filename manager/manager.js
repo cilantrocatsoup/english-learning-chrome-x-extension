@@ -57,7 +57,13 @@ async function renderWords(filter = "") {
             </div>
             <div class="def-cn">${word.cnDef || 'No definition'}</div>
             <div class="def-en">${word.enDef || ''}</div>
-            ${word.context ? `<div class="context-box">"${word.context}"</div>` : ''}
+            ${word.context ? `
+                <div class="context-box ${word.sourceUrl ? 'clickable' : ''}" 
+                     title="${word.sourceUrl ? 'Open source: ' + word.sourceUrl : ''}"
+                     data-url="${word.sourceUrl || ''}">
+                    "${word.context}"
+                    ${word.sourceUrl ? '<span style="float:right; font-size:12px; opacity:0.6; margin-left:5px;">🔗</span>' : ''}
+                </div>` : ''}
             <div class="timestamp">${new Date(word.timestamp).toLocaleDateString()}</div>
         `;
 
@@ -65,6 +71,14 @@ async function renderWords(filter = "") {
         card.querySelector('.word').addEventListener('click', () => {
             chrome.runtime.sendMessage({ action: "PLAY_AUDIO", url: word.audioUrl, word: word.word });
         });
+
+        // Click context to open URL
+        const contextBox = card.querySelector('.context-box');
+        if (contextBox && word.sourceUrl) {
+            contextBox.addEventListener('click', () => {
+                window.open(word.sourceUrl, '_blank');
+            });
+        }
 
         // Delete
         card.querySelector('.delete-icon').addEventListener('click', async (e) => {

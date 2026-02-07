@@ -8,6 +8,20 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     sendResponse({ status: "ok" });
   }
 
+  if (request.action === "PLAY_AUDIO") {
+    // Try to play audio URL if available, otherwise use TTS
+    if (request.url) {
+      const audio = new Audio(request.url);
+      audio.play().catch(() => {
+        // Fallback to TTS if audio fails
+        chrome.tts.speak(request.word, { lang: 'en-US', rate: 1.0 });
+      });
+    } else {
+      chrome.tts.speak(request.word, { lang: 'en-US', rate: 1.0 });
+    }
+    sendResponse({ status: "ok" });
+  }
+
   if (request.action === "LOOKUP_WORD") {
     handleLookup(request.word, request.context, request.sourceUrl).then(sendResponse);
     return true;
