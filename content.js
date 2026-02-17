@@ -188,6 +188,11 @@ document.addEventListener('click', async (event) => {
     const word = wordRange.toString().trim();
     if (!word || !/^[a-zA-Z]+$/.test(word) || word.length < 2) return;
 
+    // STOP PROPAGATION: Prevent the click from triggering links (like on X.com)
+    event.preventDefault();
+    event.stopPropagation();
+    event.stopImmediatePropagation();
+
     console.log("Captured:", word);
 
     // 3. Visual Feedback (Overlay Box)
