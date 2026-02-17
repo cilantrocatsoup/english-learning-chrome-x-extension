@@ -10,6 +10,10 @@
     "tts",
     "unlimitedStorage"
   ],
+  "host_permissions": [
+    "*://api.dictionaryapi.dev/*",
+    "*://dict.youdao.com/*"
+  ],
   "background": {
     "service_worker": "background.js"
   },
@@ -36,6 +40,16 @@
         "content.js"
       ],
       "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "icons/*.png"
+      ],
+      "matches": [
+        "<all_urls>"
+      ]
     }
   ]
 }
